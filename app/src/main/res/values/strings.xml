@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">North Star</string>
+    <string name="enter_car_number">Например A777AA 71</string>
+    <string name="save_car_number">Сохранить</string>
+    <string name="hello_txt">Добро пожаловать в North Star Logistics!</string>
+    <string name="enter_car_number_txt">Введите пожалуйста номер машины на которой вы сейчас работаете: </string>
+</resources>
