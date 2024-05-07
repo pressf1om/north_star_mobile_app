@@ -4,4 +4,6 @@
     <string name="save_car_number">Сохранить</string>
     <string name="hello_txt">Добро пожаловать в North Star Logistics!</string>
     <string name="enter_car_number_txt">Введите пожалуйста номер машины на которой вы сейчас работаете: </string>
+    <string name="applications_now_txt">Актуальная заявка: </string>
+    <string name="dot">.</string>
 </resources>

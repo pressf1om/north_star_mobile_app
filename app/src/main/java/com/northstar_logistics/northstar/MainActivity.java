@@ -20,19 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
     TextView car_number_text_main_activity;
     String number_car;
+    TextView displaying_the_application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Вызов GET запроса
-        // new GetTask().execute(number_car);
-
-        // Вызов POST запроса
-        // new PostTask().execute(number_car, "5");\
-
         car_number_text_main_activity = findViewById(R.id.car_number_text_main_activity);
+        displaying_the_application = findViewById(R.id.application_now);
 
         // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
         File file = new File(getFilesDir(), "car_number.txt");
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             // Считываем строку из файла и сохраняем в переменную number_car
-            String number_car = bufferedReader.readLine();
+            number_car = bufferedReader.readLine();
 
             car_number_text_main_activity.setText(number_car);
 
@@ -56,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Ошибка при чтении данных из файла", Toast.LENGTH_SHORT).show();
         }
+
+        // Вызов GET запроса
+        new GetTask().execute(number_car);
+
+        // Вызов POST запроса
+        // new PostTask().execute(number_car, "5");\
     }
 
     // получение данных
@@ -67,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 if (jsonResponse != null) {
                     Log.i("NETWORK", "Объект получен");
                     return new JSONObject(jsonResponse);
+                } else {
+                    Log.i("NETWORK", "jsonResponse != null");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -80,18 +84,28 @@ public class MainActivity extends AppCompatActivity {
             if (result != null) {
                 try {
                     String status = result.getString("status");
+                    String coord_start = result.getString("coord_start");
+                    String coord_end = result.getString("coord_end");
+                    String date_of_start = result.getString("date_of_start");
+                    String id = result.getString("id");
+                    String weight = result.getString("weight");
 
-                    String displayText = "Car Number: " + number_car + "\n"
-                            + "Status: " + status + "\n";
+                    String displayJSONTxt = "ID: " + id + "\n"
+                            + "date_of_start: " + date_of_start + "\n"
+                            + "Weight: " + weight + "\n"
+                            + "Status: " + status + "\n"
+                            + "coord_start: " + coord_start + "\n"
+                            + "coord_end: " + coord_end + "\n";
 
-                    // main_text.setText(displayText);
+
+                    displaying_the_application.setText(displayJSONTxt);
                     Log.i("NETWORK", "Объект выведен");
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    // main_text.setText("Ошибка при распарсивании JSON: " + e.getMessage());
+                    displaying_the_application.setText("Ошибка при распарсивании JSON: " + e.getMessage());
                 }
             } else {
-                // main_text.setText("Ошибка при выполнении GET запроса");
+                displaying_the_application.setText("Ошибка при выполнении GET запроса");
             }
         }
     }
