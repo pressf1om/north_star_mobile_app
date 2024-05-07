@@ -18,17 +18,27 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Надпись номера машины на главной страницу
     TextView car_number_text_main_activity;
+    // Номер машины получаемый из текстового файла
     String number_car;
-    TextView displaying_the_application;
+    // Надписи на главной странице
+    TextView id_txt, status_txt, date_of_start_txt, coord_start_txt, coord_end_txt, weight_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // находим элементы TextView
         car_number_text_main_activity = findViewById(R.id.car_number_text_main_activity);
-        displaying_the_application = findViewById(R.id.application_now);
+        id_txt = findViewById(R.id.id);
+        status_txt = findViewById(R.id.status);
+        date_of_start_txt = findViewById(R.id.date_of_start);
+        coord_start_txt = findViewById(R.id.coord_start);
+        coord_end_txt = findViewById(R.id.coord_end);
+        weight_txt = findViewById(R.id.weight);
+
 
         // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
         File file = new File(getFilesDir(), "car_number.txt");
@@ -41,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             // Считываем строку из файла и сохраняем в переменную number_car
             number_car = bufferedReader.readLine();
 
+            // Устанавливаем номер автомобиля на главной странице
             car_number_text_main_activity.setText(number_car);
 
             // Закрываем потоки
@@ -83,29 +94,36 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject result) {
             if (result != null) {
                 try {
+                    // Парсим json
+                    String id = result.getString("id");
                     String status = result.getString("status");
+                    String date_of_start = result.getString("date_of_start");
                     String coord_start = result.getString("coord_start");
                     String coord_end = result.getString("coord_end");
-                    String date_of_start = result.getString("date_of_start");
-                    String id = result.getString("id");
                     String weight = result.getString("weight");
 
-                    String displayJSONTxt = "ID: " + id + "\n"
-                            + "date_of_start: " + date_of_start + "\n"
-                            + "Weight: " + weight + "\n"
-                            + "Status: " + status + "\n"
-                            + "coord_start: " + coord_start + "\n"
-                            + "coord_end: " + coord_end + "\n";
+                    // устанавливаем значения из json
+                    id_txt.setText(String.format("ID: %s", id));
+                    status_txt.setText(String.format("Статус заявки: %s", status));
+                    date_of_start_txt.setText(String.format("Дата начала: %s", date_of_start));
+                    coord_start_txt.setText(String.format("Начальные координаты: \n%s", coord_start));
+                    coord_end_txt.setText(String.format("Конечные координаты: \n%s", coord_end));
+                    weight_txt.setText(String.format("Вес груза (в тоннах): %s", weight));
 
-
-                    displaying_the_application.setText(displayJSONTxt);
                     Log.i("NETWORK", "Объект выведен");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    displaying_the_application.setText("Ошибка при распарсивании JSON: " + e.getMessage());
+                    Log.e("JSON", "Ошибка при распарсивании JSON: " + e.getMessage());
+                    Toast.makeText(getApplicationContext(),
+                            "Ошибка при распарсивании JSON: " + e.getMessage(),
+                            Toast.LENGTH_SHORT).show();
                 }
             } else {
-                displaying_the_application.setText("Ошибка при выполнении GET запроса");
+                Log.e("GET", "Ошибка при выполнении GET запроса");
+                Toast.makeText(getApplicationContext(),
+                        "Ошибка при выполнении GET запроса",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
