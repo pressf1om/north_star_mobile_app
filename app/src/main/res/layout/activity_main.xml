@@ -125,6 +125,62 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <TextView
+            android:id="@+id/goBack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif-black"
+            android:minHeight="48dp"
+            android:onClick="goBackBtn"
+            android:rotation="270"
+            android:text="@string/goBack"
+            android:textColor="@color/main_color"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/routes"
+            android:layout_width="90dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="100dp"
+            android:fontFamily="sans-serif-black"
+            android:minHeight="48dp"
+            android:onClick="goRoutes"
+            android:rotation="270"
+            android:text="@string/routes"
+            android:textColor="@color/main_color"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/carBtn"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="90dp"
+            android:fontFamily="sans-serif-black"
+            android:minHeight="48dp"
+            android:onClick="goCar"
+            android:rotation="270"
+            android:text="@string/carBtnTxt"
+            android:textColor="@color/main_color"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/archive"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="90dp"
+            android:fontFamily="sans-serif-black"
+            android:minHeight="48dp"
+            android:onClick="goArchive"
+            android:rotation="270"
+            android:text="@string/archive"
+            android:textColor="@color/main_color"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,8 @@
     <string name="enter_car_number_txt">Введите пожалуйста номер машины на которой вы сейчас работаете: </string>
     <string name="applications_now_txt">Актуальная заявка: </string>
     <string name="dot">.</string>
+    <string name="goBack">Вход</string>
+    <string name="routes">Маршрут</string>
+    <string name="carBtnTxt">Машина</string>
+    <string name="archive">Архив</string>
 </resources>

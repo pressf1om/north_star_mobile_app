@@ -1,8 +1,10 @@
 package com.northstar_logistics.northstar;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Вызов GET запроса
         new GetTask().execute(number_car);
-
-        // Вызов POST запроса
-        // new PostTask().execute(number_car, "5");\
     }
 
     // получение данных
@@ -158,24 +157,41 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    // Боковое меню
 
-    // Post отправка данных
-    private class PostTask extends AsyncTask<String, Void, Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-            try {
-                GetPostWorking.post(params[0], params[1]);
-                Log.i("NETWORK", "Объект отправлен Post запросом");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+    // Назад на главную страницу
+    public void goBackBtn(View view) {
+        // Создаем объект Intent для перехода на новую активность
+        Intent intent = new Intent(MainActivity.this, StartActivity.class);
 
-        // действия после завершения
-        @Override
-        protected void onPostExecute(Void aVoid) {
+        // Запускаем новую активность
+        startActivity(intent);
+    }
 
-        }
+    // Переход на страницу "Маршрут"
+    public void goRoutes(View view) {
+        // Создаем объект Intent для перехода на новую активность
+        Intent intent = new Intent(MainActivity.this, RoutesActivity.class);
+
+        // Запускаем новую активность
+        startActivity(intent);
+    }
+
+    // Переход на страницу "Машина"
+    public void goCar(View view) {
+        // Создаем объект Intent для перехода на новую активность
+        Intent intent = new Intent(MainActivity.this, CarActivity.class);
+
+        // Запускаем новую активность
+        startActivity(intent);
+    }
+
+    // Переход на страницу "Архив"
+    public void goArchive(View view) {
+        // Создаем объект Intent для перехода на новую активность
+        Intent intent = new Intent(MainActivity.this, ArchiveActivity.class);
+
+        // Запускаем новую активность
+        startActivity(intent);
     }
 }
