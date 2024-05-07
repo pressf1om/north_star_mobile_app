@@ -102,6 +102,37 @@ public class MainActivity extends AppCompatActivity {
                     String coord_end = result.getString("coord_end");
                     String weight = result.getString("weight");
 
+                    // приводим статусы к нормальному виду
+                    switch (status) {
+                        case "1":
+                            status = "Свободна";
+                            break;
+                        case "2":
+                            status = "Назначена";
+                            break;
+                        case "3":
+                            status = "Прибыла на погрузку";
+                            break;
+                        case "4":
+                            status = "Погружена";
+                            break;
+                        case "5":
+                            status = "Транзит";
+                            break;
+                        case "6":
+                            status = "Прибыла на выгрузку";
+                            break;
+                        case "7":
+                            status = "Выгружена";
+                            break;
+                        case "8":
+                            status = "Завершение рейса";
+                            break;
+                        case "9":
+                            status = "Техническое обслуживание";
+                            break;
+                    }
+
                     // устанавливаем значения из json
                     id_txt.setText(String.format("ID: %s", id));
                     status_txt.setText(String.format("Статус заявки: %s", status));
