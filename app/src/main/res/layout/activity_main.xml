@@ -37,21 +37,23 @@
         android:id="@+id/applications_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/applications_now_txt"
         android:textColor="@color/main_color"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <LinearLayout
+        android:id="@+id/mainLinearLayout"
         android:layout_width="0dp"
         android:layout_height="420dp"
         android:layout_marginStart="70dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:background="@color/white"
         android:orientation="vertical"
         android:paddingStart="15sp"
@@ -64,9 +66,9 @@
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/dot"
             android:textColor="@color/main_color"
-            android:layout_marginTop="20dp"
             android:textSize="25sp" />
 
         <TextView
@@ -82,8 +84,8 @@
             android:id="@+id/date_of_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dot"
             android:layout_marginTop="20dp"
+            android:text="@string/dot"
             android:textColor="@color/main_color"
             android:textSize="25sp" />
 
@@ -91,8 +93,8 @@
             android:id="@+id/coord_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dot"
             android:layout_marginTop="20dp"
+            android:text="@string/dot"
             android:textColor="@color/main_color"
             android:textSize="25sp" />
 
@@ -100,8 +102,8 @@
             android:id="@+id/coord_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dot"
             android:layout_marginTop="20dp"
+            android:text="@string/dot"
             android:textColor="@color/main_color"
             android:textSize="25sp" />
 
@@ -109,10 +111,20 @@
             android:id="@+id/weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dot"
             android:layout_marginTop="20dp"
+            android:text="@string/dot"
             android:textColor="@color/main_color"
             android:textSize="25sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
