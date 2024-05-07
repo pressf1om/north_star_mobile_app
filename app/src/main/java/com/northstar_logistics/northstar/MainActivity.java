@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
     // Боковое меню
 
-    // Назад на главную страницу
+    // Назад на страницу входа
     public void goBackBtn(View view) {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(MainActivity.this, StartActivity.class);
