@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Добавляем данные в Intent
         intent.putExtra("id", id); // "key" - ключ, "value" - значение
+        intent.putExtra("status", status); // "key" - ключ, "value" - значение
 
         // Запускаем новую активность
         startActivity(intent);
