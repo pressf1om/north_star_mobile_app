@@ -19,8 +19,8 @@ public class RoutesActivity extends AppCompatActivity {
     Button btnChangeStatus;
     String status_;
     String number_car;
-    int valueForProgressBar;
     String data_status;
+    int intValueForProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,81 +59,79 @@ public class RoutesActivity extends AppCompatActivity {
         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
 
 
-        // question.setText(textQuestion);
+        question.setText(changeQuestion(status_));
+        int status_int = Integer.parseInt(status_);
+        status_int = status_int - 1;
+        String status_forProgressBar = String.valueOf(status_int);
+        progressBar.setProgress(changeProgressBar(status_forProgressBar));
 
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (status_) {
-                    case "1":
-                        status_ = "2";
-                        data_status = "Назначена";
-                        valueForProgressBar = 13;
                     case "2":
-                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
-                        question.setText(changeQuestion("2"));
-                        new PostTask().execute(number_car, "3");
-                        status_ = "3";
+                        progressBar.setProgress(changeProgressBar("2"));
                         data_status = "Прибыла на погрузку";
-                        valueForProgressBar = 26;
-                        break;
-                    case "3":
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("3"));
-                        new PostTask().execute(number_car, "4");
-                        status_ = "4";
-                        data_status = "Погружена";
-                        valueForProgressBar = 39;
+                        new PostTask().execute(number_car, "3");
+                        status_ = "3";
                         break;
-                    case "4":
+                    case "3":
+                        progressBar.setProgress(changeProgressBar("3"));
+                        data_status = "Погружена";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("4"));
-                        new PostTask().execute(number_car, "5");
-                        status_ = "5";
-                        data_status = "Транзит";
-                        valueForProgressBar = 52;
+                        new PostTask().execute(number_car, "4");
+                        status_ = "4";
                         break;
-                    case "5":
+                    case "4":
+                        progressBar.setProgress(changeProgressBar("4"));
+                        data_status = "Транзит";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("5"));
-                        new PostTask().execute(number_car, "6");
-                        status_ = "6";
-                        data_status = "Прибыла на выгрузку";
-                        valueForProgressBar = 65;
+                        new PostTask().execute(number_car, "5");
+                        status_ = "5";
                         break;
-                    case "6":
+                    case "5":
+                        progressBar.setProgress(changeProgressBar("5"));
+                        data_status = "Прибыла на выгрузку";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("6"));
-                        new PostTask().execute(number_car, "7");
-                        status_ = "7";
-                        data_status = "Выгружена";
-                        valueForProgressBar = 78;
+                        new PostTask().execute(number_car, "6");
+                        status_ = "6";
                         break;
-                    case "7":
+                    case "6":
+                        progressBar.setProgress(changeProgressBar("6"));
+                        data_status = "Выгружена";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("7"));
-                        new PostTask().execute(number_car, "8");
-                        status_ = "8";
-                        data_status = "Завершение рейса";
-                        valueForProgressBar = 91;
+                        new PostTask().execute(number_car, "7");
+                        status_ = "7";
                         break;
-                    case "8":
+                    case "7":
+                        progressBar.setProgress(changeProgressBar("7"));
+                        data_status = "Завершение рейса";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText(changeQuestion("8"));
-                        new PostTask().execute(number_car, "2");
+                        new PostTask().execute(number_car, "8");
+                        status_ = "8";
+                        break;
+                    case "8":
+                        progressBar.setProgress(changeProgressBar("8"));
+                        data_status = "Выполнена";
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText("Ожидайте новой заявки");
+                        new PostTask().execute(number_car, "1");
                         status_ = "2";
-                        data_status = "Назначена";
                         break;
                 }
             }
         });
-
-        // Устанавливаем текущее значение прогресса
-        progressBar.setProgress(valueForProgressBar);
     }
 
     // Post отправка данных
-    private class PostTask extends AsyncTask<String, Void, Void> {
+    private static class PostTask extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             try {
@@ -150,6 +148,37 @@ public class RoutesActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
 
         }
+    }
+
+    public int changeProgressBar (String status_) {
+        // Вопрос для смены статуса
+        switch (status_) {
+            case "2":
+                intValueForProgressBar = 13;
+                break;
+            case "3":
+                intValueForProgressBar = 26;
+                break;
+            case "4":
+                intValueForProgressBar = 39;
+                break;
+            case "5":
+                intValueForProgressBar = 52;
+                break;
+            case "6":
+                intValueForProgressBar = 65;
+                break;
+            case "7":
+                intValueForProgressBar = 78;
+                break;
+            case "8":
+                intValueForProgressBar = 91;
+                break;
+            default:
+                intValueForProgressBar = 0;
+                break;
+        }
+        return intValueForProgressBar;
     }
 
     public String changeQuestion(String status_) {
