@@ -59,35 +59,7 @@ public class RoutesActivity extends AppCompatActivity {
         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
 
 
-        // Вопрос для смены статуса
-        switch (status_) {
-            case "2":
-                textQuestion = "Вы доехали до места погрузки?";
-                break;
-            case "3":
-                textQuestion = "Вы загрузились?";
-                break;
-            case "4":
-                textQuestion = "Вы в пути?";
-                break;
-            case "5":
-                textQuestion = "Вы доехали до выгрузки?";
-                break;
-            case "6":
-                textQuestion = "Вы выгрузились?";
-                break;
-            case "7":
-                textQuestion = "Вы готовы завершить рейс?";
-                break;
-            case "8":
-                textQuestion = "Вы готовы ехать дальше?";
-                break;
-            default:
-                textQuestion = "Неизвестный статус машины";
-                break;
-        }
-
-        question.setText(textQuestion);
+        // question.setText(textQuestion);
 
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,49 +70,56 @@ public class RoutesActivity extends AppCompatActivity {
                         data_status = "Назначена";
                         valueForProgressBar = 13;
                     case "2":
-                        question.setText("Назначена");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("2"));
                         new PostTask().execute(number_car, "3");
                         status_ = "3";
                         data_status = "Прибыла на погрузку";
                         valueForProgressBar = 26;
                         break;
                     case "3":
-                        question.setText("Прибыла на погрузку");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("3"));
                         new PostTask().execute(number_car, "4");
                         status_ = "4";
                         data_status = "Погружена";
                         valueForProgressBar = 39;
                         break;
                     case "4":
-                        question.setText("Погружена");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("4"));
                         new PostTask().execute(number_car, "5");
                         status_ = "5";
                         data_status = "Транзит";
                         valueForProgressBar = 52;
                         break;
                     case "5":
-                        question.setText("Транзит");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("5"));
                         new PostTask().execute(number_car, "6");
                         status_ = "6";
                         data_status = "Прибыла на выгрузку";
                         valueForProgressBar = 65;
                         break;
                     case "6":
-                        question.setText("Прибыла на выгрузку");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("6"));
                         new PostTask().execute(number_car, "7");
                         status_ = "7";
                         data_status = "Выгружена";
                         valueForProgressBar = 78;
                         break;
                     case "7":
-                        question.setText("Выгружена");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("7"));
                         new PostTask().execute(number_car, "8");
                         status_ = "8";
                         data_status = "Завершение рейса";
                         valueForProgressBar = 91;
                         break;
                     case "8":
-                        question.setText("Завершение рейса");
+                        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+                        question.setText(changeQuestion("8"));
                         new PostTask().execute(number_car, "2");
                         status_ = "2";
                         data_status = "Назначена";
@@ -171,6 +150,37 @@ public class RoutesActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
 
         }
+    }
+
+    public String changeQuestion(String status_) {
+        // Вопрос для смены статуса
+        switch (status_) {
+            case "2":
+                textQuestion = "Вы доехали до места погрузки?";
+                break;
+            case "3":
+                textQuestion = "Вы загрузились?";
+                break;
+            case "4":
+                textQuestion = "Вы в пути?";
+                break;
+            case "5":
+                textQuestion = "Вы доехали до выгрузки?";
+                break;
+            case "6":
+                textQuestion = "Вы выгрузились?";
+                break;
+            case "7":
+                textQuestion = "Вы готовы завершить рейс?";
+                break;
+            case "8":
+                textQuestion = "Вы готовы ехать дальше?";
+                break;
+            default:
+                textQuestion = "Неизвестный статус машины";
+                break;
+        }
+        return textQuestion;
     }
 
     // Боковое меню
