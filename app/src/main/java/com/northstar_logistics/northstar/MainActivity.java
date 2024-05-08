@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     String number_car;
     // Надписи на главной странице
     TextView id_txt, status_txt, date_of_start_txt, coord_start_txt, coord_end_txt, weight_txt;
+    // Текст заявки
+    String id, status, date_of_start, coord_start, coord_end, weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +96,12 @@ public class MainActivity extends AppCompatActivity {
             if (result != null) {
                 try {
                     // Парсим json
-                    String id = result.getString("id");
-                    String status = result.getString("status");
-                    String date_of_start = result.getString("date_of_start");
-                    String coord_start = result.getString("coord_start");
-                    String coord_end = result.getString("coord_end");
-                    String weight = result.getString("weight");
+                    id = result.getString("id");
+                    status = result.getString("status");
+                    date_of_start = result.getString("date_of_start");
+                    coord_start = result.getString("coord_start");
+                    coord_end = result.getString("coord_end");
+                    weight = result.getString("weight");
 
                     // приводим статусы к нормальному виду
                     switch (status) {
@@ -173,9 +175,13 @@ public class MainActivity extends AppCompatActivity {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(MainActivity.this, RoutesActivity.class);
 
+        // Добавляем данные в Intent
+        intent.putExtra("id", id); // "key" - ключ, "value" - значение
+
         // Запускаем новую активность
         startActivity(intent);
     }
+
 
     // Переход на страницу "Машина"
     public void goCar(View view) {

@@ -7,13 +7,26 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class RoutesActivity extends AppCompatActivity {
+
+    TextView idRoutesTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routes);
+
+        idRoutesTxt = findViewById(R.id.idRoutesTxt);
+
+        // Получаем Intent, который вызвал эту активность
+        Intent intent = getIntent();
+
+        // Получаем данные из Intent
+        String data = intent.getStringExtra("id"); // "key" - ключ, по которому получаем данные
+
+        idRoutesTxt.setText(String.format("ID Заявки: %s", data));
 
         // Вызов POST запроса
         // new PostTask().execute(number_car, "5");\
@@ -38,6 +51,8 @@ public class RoutesActivity extends AppCompatActivity {
 
         }
     }
+
+    // Боковое меню
 
     // Назад на страницу входа
     public void goBackBtn(View view) {
