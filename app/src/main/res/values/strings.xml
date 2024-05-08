@@ -11,4 +11,6 @@
     <string name="carBtnTxt">Машина</string>
     <string name="archive">Архив</string>
     <string name="mainActivity">Главная</string>
+    <string name="progressBarTxt">Прогресс вашей поездки</string>
+    <string name="yesAndIWantChangeStatus">Да, и хочу перейти к следущему пункту</string>
 </resources>

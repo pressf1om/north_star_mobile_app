@@ -121,4 +121,39 @@
         app:layout_constraintStart_toEndOf="@+id/menu"
         app:layout_constraintTop_toBottomOf="@+id/status_display" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="30dp"
+        android:indeterminateDrawable="@drawable/horizontal_progress_bar_green"
+        android:progressDrawable="@drawable/horizontal_progress_bar_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menu"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/progressBarTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/progressBarTxt"
+        android:textColor="@color/main_color"
+        app:layout_constraintStart_toEndOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+    <Button
+        android:id="@+id/btnChangeStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/yesAndIWantChangeStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

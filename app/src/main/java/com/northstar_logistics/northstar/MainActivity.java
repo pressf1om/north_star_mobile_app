@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView id_txt, status_txt, date_of_start_txt, coord_start_txt, coord_end_txt, weight_txt;
     // Текст заявки
     String id, status, date_of_start, coord_start, coord_end, weight;
+    String status_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
                     coord_start = result.getString("coord_start");
                     coord_end = result.getString("coord_end");
                     weight = result.getString("weight");
+
+                    // для корректной передачи на следущую страницу
+                    status_ = status;
 
                     // приводим статусы к нормальному виду
                     switch (status) {
@@ -178,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
         // Добавляем данные в Intent
         intent.putExtra("id", id); // "key" - ключ, "value" - значение
         intent.putExtra("status", status); // "key" - ключ, "value" - значение
+        intent.putExtra("status_", status_); // "key" - ключ, "value" - значение
+        intent.putExtra("number_car", number_car); // "key" - ключ, "value" - значение
 
         // Запускаем новую активность
         startActivity(intent);
