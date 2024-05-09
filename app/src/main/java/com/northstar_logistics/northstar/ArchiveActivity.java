@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import java.io.File;
 
 public class ArchiveActivity extends AppCompatActivity {
 
@@ -20,6 +23,19 @@ public class ArchiveActivity extends AppCompatActivity {
     public void goBackBtn(View view) {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(ArchiveActivity.this, StartActivity.class);
+
+        // Удаляем файл "car_number.txt", если он существует
+        File file = new File(getFilesDir(), "car_number.txt");
+        if (file.exists()) {
+            boolean isDeleted = file.delete();
+            if (!isDeleted) {
+                Log.e("FileDeletion", "Failed to delete file");
+                // Дополнительная обработка ошибки, если не удалось удалить файл
+            }
+        } else {
+            Log.i("FileDeletion", "File does not exist");
+            // Дополнительная обработка, если файл не существует
+        }
 
         // Запускаем новую активность
         startActivity(intent);

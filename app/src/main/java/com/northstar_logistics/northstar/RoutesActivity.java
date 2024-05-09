@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.File;
+
 public class RoutesActivity extends AppCompatActivity {
 
     TextView idRoutesTxt, status_display, question;
@@ -65,11 +67,21 @@ public class RoutesActivity extends AppCompatActivity {
         String status_forProgressBar = String.valueOf(status_int);
         progressBar.setProgress(changeProgressBar(status_forProgressBar));
 
+        if (status_.equals("1")) {
+            status_display.setText("Сейчас заявки не найдены");
+            question.setText("Пожалуйста, дождитесь назначения новой заявки");
+            btnChangeStatus.setVisibility(View.GONE);
+            Log.i("STATUS", "Пожалуйста, дождитесь назначения новой заявки");
+        }
+
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (status_) {
                     case "2":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("2"));
                         data_status = "Прибыла на погрузку";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -78,6 +90,9 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "3";
                         break;
                     case "3":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("3"));
                         data_status = "Погружена";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -86,6 +101,9 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "4";
                         break;
                     case "4":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("4"));
                         data_status = "Транзит";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -94,6 +112,9 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "5";
                         break;
                     case "5":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("5"));
                         data_status = "Прибыла на выгрузку";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -102,6 +123,9 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "6";
                         break;
                     case "6":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("6"));
                         data_status = "Выгружена";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -110,6 +134,9 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "7";
                         break;
                     case "7":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
                         progressBar.setProgress(changeProgressBar("7"));
                         data_status = "Завершение рейса";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
@@ -118,12 +145,17 @@ public class RoutesActivity extends AppCompatActivity {
                         status_ = "8";
                         break;
                     case "8":
+                        if (btnChangeStatus.getVisibility() == View.GONE) {
+                            btnChangeStatus.setVisibility(View.VISIBLE);
+                        }
+                        // добавить изменение стиля и самой кнопки для завершения заявки + обновить прогресс бар
                         progressBar.setProgress(changeProgressBar("8"));
                         data_status = "Выполнена";
                         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
                         question.setText("Ожидайте новой заявки");
                         new PostTask().execute(number_car, "1");
-                        status_ = "2";
+                        status_ = "1";
+                        Log.i("STATUS_APPLICATION", "ВЫПОЛНЕНА");
                         break;
                 }
             }
@@ -218,6 +250,19 @@ public class RoutesActivity extends AppCompatActivity {
     public void goBackBtn(View view) {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(RoutesActivity.this, StartActivity.class);
+
+        // Удаляем файл "car_number.txt", если он существует
+        File file = new File(getFilesDir(), "car_number.txt");
+        if (file.exists()) {
+            boolean isDeleted = file.delete();
+            if (!isDeleted) {
+                Log.e("FileDeletion", "Failed to delete file");
+                // Дополнительная обработка ошибки, если не удалось удалить файл
+            }
+        } else {
+            Log.i("FileDeletion", "File does not exist");
+            // Дополнительная обработка, если файл не существует
+        }
 
         // Запускаем новую активность
         startActivity(intent);

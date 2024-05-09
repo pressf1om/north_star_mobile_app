@@ -137,16 +137,22 @@ public class MainActivity extends AppCompatActivity {
                             status = "Техническое обслуживание";
                             break;
                     }
+                        // Пофиксить в коде сервера, на статус "Выполнена"
+                    if (!status.equals("Свободна")) {
+                        // устанавливаем значения из json
+                        id_txt.setText(String.format("ID: %s", id));
+                        status_txt.setText(String.format("Статус заявки: %s", status));
+                        date_of_start_txt.setText(String.format("Дата начала: %s", date_of_start));
+                        coord_start_txt.setText(String.format("Начальные координаты: \n%s", coord_start));
+                        coord_end_txt.setText(String.format("Конечные координаты: \n%s", coord_end));
+                        weight_txt.setText(String.format("Вес груза (в тоннах): %s", weight));
 
-                    // устанавливаем значения из json
-                    id_txt.setText(String.format("ID: %s", id));
-                    status_txt.setText(String.format("Статус заявки: %s", status));
-                    date_of_start_txt.setText(String.format("Дата начала: %s", date_of_start));
-                    coord_start_txt.setText(String.format("Начальные координаты: \n%s", coord_start));
-                    coord_end_txt.setText(String.format("Конечные координаты: \n%s", coord_end));
-                    weight_txt.setText(String.format("Вес груза (в тоннах): %s", weight));
+                        Log.i("NETWORK", "Объект выведен");
+                    } else {
+                        id_txt.setText("Сейчас нет назначенных заявок");
+                    }
 
-                    Log.i("NETWORK", "Объект выведен");
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -156,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
+                id_txt.setText("Заявки не найдены");
                 Log.e("GET", "Ошибка при выполнении GET запроса");
                 Toast.makeText(getApplicationContext(),
                         "Ошибка при выполнении GET запроса",
@@ -169,6 +176,19 @@ public class MainActivity extends AppCompatActivity {
     public void goBackBtn(View view) {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(MainActivity.this, StartActivity.class);
+
+        // Удаляем файл "car_number.txt", если он существует
+        File file = new File(getFilesDir(), "car_number.txt");
+        if (file.exists()) {
+            boolean isDeleted = file.delete();
+            if (!isDeleted) {
+                Log.e("FileDeletion", "Failed to delete file");
+                // Дополнительная обработка ошибки, если не удалось удалить файл
+            }
+        } else {
+            Log.i("FileDeletion", "File does not exist");
+            // Дополнительная обработка, если файл не существует
+        }
 
         // Запускаем новую активность
         startActivity(intent);
