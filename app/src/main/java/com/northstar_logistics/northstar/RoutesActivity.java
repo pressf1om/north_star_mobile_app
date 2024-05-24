@@ -60,18 +60,21 @@ public class RoutesActivity extends AppCompatActivity {
         idRoutesTxt.setText(String.format("ID Заявки: %s", data_id));
         status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
 
+        if (status_ != null) {
+            question.setText(changeQuestion(status_));
 
-        question.setText(changeQuestion(status_));
-        int status_int = Integer.parseInt(status_);
-        status_int = status_int - 1;
-        String status_forProgressBar = String.valueOf(status_int);
-        progressBar.setProgress(changeProgressBar(status_forProgressBar));
+            int status_int = Integer.parseInt(status_);
+            status_int = status_int - 1;
 
-        if (status_.equals("1")) {
-            status_display.setText("Сейчас заявки не найдены");
-            question.setText("Пожалуйста, дождитесь назначения новой заявки");
-            btnChangeStatus.setVisibility(View.GONE);
-            Log.i("STATUS", "Пожалуйста, дождитесь назначения новой заявки");
+            String status_forProgressBar = String.valueOf(status_int);
+            progressBar.setProgress(changeProgressBar(status_forProgressBar));
+
+            if (status_.equals("1")) {
+                status_display.setText("Сейчас заявки не найдены");
+                question.setText("Пожалуйста, дождитесь назначения новой заявки");
+                btnChangeStatus.setVisibility(View.GONE);
+                Log.i("STATUS", "Пожалуйста, дождитесь назначения новой заявки");
+            }
         }
 
         btnChangeStatus.setOnClickListener(new View.OnClickListener() {
@@ -215,31 +218,35 @@ public class RoutesActivity extends AppCompatActivity {
 
     public String changeQuestion(String status_) {
         // Вопрос для смены статуса
-        switch (status_) {
-            case "2":
-                textQuestion = "Вы доехали до места погрузки?";
-                break;
-            case "3":
-                textQuestion = "Вы загрузились?";
-                break;
-            case "4":
-                textQuestion = "Вы в пути?";
-                break;
-            case "5":
-                textQuestion = "Вы доехали до выгрузки?";
-                break;
-            case "6":
-                textQuestion = "Вы выгрузились?";
-                break;
-            case "7":
-                textQuestion = "Вы готовы завершить рейс?";
-                break;
-            case "8":
-                textQuestion = "Вы готовы ехать дальше?";
-                break;
-            default:
-                textQuestion = "Неизвестный статус машины";
-                break;
+        if (status_ != null) {
+            switch (status_) {
+                case "2":
+                    textQuestion = "Вы доехали до места погрузки?";
+                    break;
+                case "3":
+                    textQuestion = "Вы загрузились?";
+                    break;
+                case "4":
+                    textQuestion = "Вы в пути?";
+                    break;
+                case "5":
+                    textQuestion = "Вы доехали до выгрузки?";
+                    break;
+                case "6":
+                    textQuestion = "Вы выгрузились?";
+                    break;
+                case "7":
+                    textQuestion = "Вы готовы завершить рейс?";
+                    break;
+                case "8":
+                    textQuestion = "Вы готовы ехать дальше?";
+                    break;
+                default:
+                    textQuestion = "Неизвестный статус машины";
+                    break;
+            }
+        } else {
+            textQuestion = "Заявки не найдены.";
         }
         return textQuestion;
     }
