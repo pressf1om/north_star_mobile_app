@@ -67,15 +67,30 @@
             android:textColor="@color/main_color"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/helpMeBtn"
+            android:layout_width="95dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="90dp"
+            android:fontFamily="sans-serif-black"
+            android:onClick="helpMe"
+            android:rotation="270"
+            android:text="@string/helpMeButton"
+            android:textColor="@color/main_color"
+            android:textSize="20sp" />
+
     </LinearLayout>
 
     <TextView
-        android:id="@+id/main_text"
+        android:id="@+id/characteristicsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="МАШИНА"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/characteristicsTextView"
+        android:textColor="@color/main_color"
+        android:textSize="30dp"
         app:layout_constraintStart_toEndOf="@+id/menu"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 

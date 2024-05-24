@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".HelpMe"
+            android:exported="false" />
+        <activity
             android:name=".ArchiveActivity"
             android:exported="false" />
         <activity
@@ -37,7 +40,6 @@
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

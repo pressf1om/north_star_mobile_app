@@ -81,4 +81,13 @@ public class CarActivity extends AppCompatActivity {
         // Запускаем новую активность
         startActivity(intent);
     }
+
+    // Переход на страницу "Помощь"
+    public void helpMe(View view) {
+        // Создаем объект Intent для перехода на новую активность
+        Intent intent = new Intent(CarActivity.this, HelpMe.class);
+
+        // Запускаем новую активность
+        startActivity(intent);
+    }
 }

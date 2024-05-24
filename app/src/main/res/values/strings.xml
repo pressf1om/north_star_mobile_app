@@ -13,4 +13,9 @@
     <string name="mainActivity">Главная</string>
     <string name="progressBarTxt">Прогресс вашей поездки</string>
     <string name="yesAndIWantChangeStatus">Да, и хочу перейти к следущему пункту</string>
+    <string name="characteristicsTextView">Характеристики: </string>
+    <string name="helpMeButton">Помощь</string>
+    <string name="uQuestion">Что у вас произошло?</string>
+    <string name="discripProblem">Опишите свою проблему здесь</string>
+    <string name="sendProblemBtnText">Отправить</string>
 </resources>
