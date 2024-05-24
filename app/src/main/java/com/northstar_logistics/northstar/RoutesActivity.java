@@ -57,8 +57,15 @@ public class RoutesActivity extends AppCompatActivity {
         number_car = intent.getStringExtra("number_car"); // "key" - ключ, по которому получаем данные
 
                 // Устанавливаем значения TextView
-        idRoutesTxt.setText(String.format("ID Заявки: %s", data_id));
-        status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+        if (data_id != null && data_status != null) {
+            idRoutesTxt.setText(String.format("ID Заявки: %s", data_id));
+            status_display.setText(String.format("Статус заявки сейчас: \n%s", data_status));
+        } else {
+            idRoutesTxt.setText("---");
+            status_display.setText("Заявка не найдена");
+            btnChangeStatus.setVisibility(View.GONE);
+        }
+
 
         if (status_ != null) {
             question.setText(changeQuestion(status_));

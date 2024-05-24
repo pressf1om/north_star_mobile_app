@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
-                id_txt.setText("Заявки не найдены, \nпожалуйста подождите \nпока вам назначан \nновую заявку");
+                id_txt.setText("Заявки не найдены, \nпожалуйста, дождитесь назначения \nновой заявки");
                 Log.e("GET", "Заявки не найдены");
                 Toast.makeText(getApplicationContext(),
                         "Заявки не найдены",
