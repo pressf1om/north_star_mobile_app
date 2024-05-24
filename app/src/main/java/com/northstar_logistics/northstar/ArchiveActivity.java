@@ -56,7 +56,7 @@ public class ArchiveActivity extends AppCompatActivity {
             number_car = bufferedReader.readLine();
 
             // Устанавливаем номер автомобиля на главной странице
-            car_number_text.setText(number_car);
+            car_number_text.setText(String.format("Архив %s", number_car));
 
             // Закрываем потоки
             bufferedReader.close();
