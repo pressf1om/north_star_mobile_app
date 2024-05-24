@@ -41,24 +41,6 @@ public class ArchiveActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Переход на страницу "Маршрут"
-    public void goRoutes(View view) {
-        // Создаем объект Intent для перехода на новую активность
-        Intent intent = new Intent(ArchiveActivity.this, RoutesActivity.class);
-
-        // Запускаем новую активность
-        startActivity(intent);
-    }
-
-    // Переход на страницу "Машина"
-    public void goCar(View view) {
-        // Создаем объект Intent для перехода на новую активность
-        Intent intent = new Intent(ArchiveActivity.this, CarActivity.class);
-
-        // Запускаем новую активность
-        startActivity(intent);
-    }
-
     // Переход на страницу "Главная"
     public void goMain(View view) {
         // Создаем объект Intent для перехода на новую активность

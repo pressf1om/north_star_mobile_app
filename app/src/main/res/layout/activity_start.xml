@@ -78,7 +78,7 @@
             android:id="@+id/save_car_to_txt_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="100dp"
+            android:layout_marginHorizontal="80dp"
             android:layout_marginTop="15dp"
             android:onClick="saveBtn"
             android:text="@string/save_car_number"

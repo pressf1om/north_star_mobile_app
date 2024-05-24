@@ -69,31 +69,6 @@
             android:textColor="@color/main_color"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/carBtn"
-            android:layout_width="80dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="90dp"
-            android:fontFamily="sans-serif-black"
-            android:minHeight="48dp"
-            android:onClick="goCar"
-            android:rotation="270"
-            android:text="@string/carBtnTxt"
-            android:textColor="@color/main_color"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/archive"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="90dp"
-            android:fontFamily="sans-serif-black"
-            android:minHeight="48dp"
-            android:onClick="goArchive"
-            android:rotation="270"
-            android:text="@string/archive"
-            android:textColor="@color/main_color"
-            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
