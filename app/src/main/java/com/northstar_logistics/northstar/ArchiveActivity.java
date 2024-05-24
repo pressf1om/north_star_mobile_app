@@ -6,15 +6,49 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class ArchiveActivity extends AppCompatActivity {
+
+    TextView car_number_text;
+    String number_car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
+
+        car_number_text = findViewById(R.id.upperTxt);
+
+        // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
+        File file = new File(getFilesDir(), "car_number.txt");
+
+        try {
+            // Создаем объект FileReader для чтения данных из файла
+            FileReader reader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            // Считываем строку из файла и сохраняем в переменную number_car
+            number_car = bufferedReader.readLine();
+
+            // Устанавливаем номер автомобиля на главной странице
+            car_number_text.setText(number_car);
+
+            // Закрываем потоки
+            bufferedReader.close();
+            reader.close();
+
+        } catch (IOException e) {
+            // В случае ошибки выводим сообщение об ошибке
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Ошибка при чтении данных из файла", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Боковое меню
