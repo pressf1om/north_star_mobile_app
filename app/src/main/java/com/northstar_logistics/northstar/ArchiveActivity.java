@@ -1,6 +1,7 @@
 package com.northstar_logistics.northstar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +14,26 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ArchiveActivity extends AppCompatActivity {
 
-    TextView car_number_text, main_text;
+    TextView car_number_text;
     String number_car;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,7 @@ public class ArchiveActivity extends AppCompatActivity {
 
         // Ищем элемент по ID
         car_number_text = findViewById(R.id.upperTxt);
-        main_text = findViewById(R.id.main_text);
+        recyclerView = findViewById(R.id.recyclerView);
 
         // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
         File file = new File(getFilesDir(), "car_number.txt");
@@ -89,15 +100,23 @@ public class ArchiveActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    // Получаем тело ответа и выводим его в логи
+                    // Получаем тело ответа
                     final String responseData = response.body().string();
                     Log.d("ArchiveActivity", "Ответ на GET-запрос: " + responseData);
 
-                    // Обновляем TextView с полученными данными
+                    // Обновляем RecyclerView с полученными данными
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            main_text.setText(responseData);
+                            // Преобразуйте строку JSON в массив объектов (пример: List<String>)
+                            List<DataModel> dataList = parseJson(responseData);
+
+                            // Создайте и настройте адаптер
+                            ArchiveAdapter adapter = new ArchiveAdapter(ArchiveActivity.this, dataList);
+
+                            // Настройте RecyclerView с адаптером
+                            recyclerView.setLayoutManager(new LinearLayoutManager(ArchiveActivity.this));
+                            recyclerView.setAdapter(adapter);
                         }
                     });
                 } else {
@@ -105,7 +124,20 @@ public class ArchiveActivity extends AppCompatActivity {
                 }
             }
 
+
         });
+    }
+
+    // Метод для парсинга JSON-строки в список объектов
+    private List<DataModel> parseJson(String json) {
+        // Создаем объект Gson для парсинга JSON
+        Gson gson = new Gson();
+
+        // Создаем тип данных, который должен быть получен после парсинга
+        Type listType = new TypeToken<List<DataModel>>(){}.getType();
+
+        // Парсим JSON и возвращаем список объектов
+        return gson.fromJson(json, listType);
     }
 
     // Боковое меню
