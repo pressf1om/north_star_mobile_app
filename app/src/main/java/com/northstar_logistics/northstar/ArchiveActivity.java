@@ -24,6 +24,7 @@ public class ArchiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
+        // Ищем элемент по ID
         car_number_text = findViewById(R.id.upperTxt);
 
         // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
