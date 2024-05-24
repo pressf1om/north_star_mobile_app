@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -25,7 +28,7 @@ public class HelpMe extends AppCompatActivity {
     private TextInputEditText textInputEditText;
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    TextInputEditText enterProblemField;
+    TextInputLayout enterProblemField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +47,24 @@ public class HelpMe extends AppCompatActivity {
     }
 
     public void sendPostRequest(View view) {
-        String text = textInputEditText.getText().toString();
+        String text = enterProblemField.getEditText().getText().toString();
         if (!text.isEmpty()) {
-            postRequest("", text); // дописать ссылку на обработчик
+            postRequest("http://northstar-logistics.ru/help_me_driver", text); // дописать ссылку на обработчик
         } else {
             Toast.makeText(this, "Пожалуйста, введите текст", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void postRequest(String url, String json) {
-        RequestBody body = RequestBody.create(JSON, json);
+    private void postRequest(String url, String message) {
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("message", message);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
@@ -75,4 +86,5 @@ public class HelpMe extends AppCompatActivity {
             }
         });
     }
+
 }
