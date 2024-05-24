@@ -42,8 +42,8 @@
 
         <TextView
             android:id="@+id/goBack"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="55dp"
             android:layout_marginStart="9dp"
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
@@ -56,8 +56,8 @@
 
         <TextView
             android:id="@+id/mainActivity"
-            android:layout_width="80dp"
-            android:layout_height="62dp"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
             android:layout_marginTop="90dp"
             android:fontFamily="sans-serif-black"
             android:minHeight="48dp"
