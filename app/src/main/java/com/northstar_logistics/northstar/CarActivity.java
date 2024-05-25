@@ -87,6 +87,9 @@ public class CarActivity extends AppCompatActivity {
         // Создаем объект Intent для перехода на новую активность
         Intent intent = new Intent(CarActivity.this, HelpMe.class);
 
+        // Добавляем номер машины в Intent
+        intent.putExtra("NUMBER_CAR", number_car);
+
         // Запускаем новую активность
         startActivity(intent);
     }

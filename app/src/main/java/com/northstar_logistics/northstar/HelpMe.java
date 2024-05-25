@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class HelpMe extends AppCompatActivity {
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     TextInputLayout enterProblemField;
+    String numberCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,33 +41,38 @@ public class HelpMe extends AppCompatActivity {
         client = new OkHttpClient();
     }
 
-    public void goBack(View view) {
-        // Создаем объект Intent для перехода на новую активность
-        Intent intent = new Intent(HelpMe.this, CarActivity.class);
-        // Запускаем новую активность
-        startActivity(intent);
-    }
-
     public void sendPostRequest(View view) {
         String text = enterProblemField.getEditText().getText().toString();
         if (!text.isEmpty()) {
-            postRequest("http://northstar-logistics.ru/help_me_driver", text);
+            // Получаем номер машины из Intent
+            Intent intent = getIntent();
+            String numberCar = intent.getStringExtra("NUMBER_CAR");
+            Log.e("HELPERROR", numberCar);
+            Log.e("HELPERROR", text);
+
+            // Создаем JSON объект с сообщением и номером машины
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("message", text);
+                jsonObject.put("car_number", numberCar); // Добавляем номер машины
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // Отправляем POST запрос на сервер
+            postRequest("http://northstar-logistics.ru/help_me_driver", jsonObject.toString());
+
+            // Очищаем поле ввода после отправки
             enterProblemField.getEditText().getText().clear();
         } else {
             Toast.makeText(this, "Пожалуйста, введите текст", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void postRequest(String url, String message) {
+    private void postRequest(String url, String json) {
         OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("message", message);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+        RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
