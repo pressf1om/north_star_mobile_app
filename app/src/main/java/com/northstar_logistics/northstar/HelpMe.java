@@ -49,7 +49,8 @@ public class HelpMe extends AppCompatActivity {
     public void sendPostRequest(View view) {
         String text = enterProblemField.getEditText().getText().toString();
         if (!text.isEmpty()) {
-            postRequest("http://northstar-logistics.ru/help_me_driver", text); // дописать ссылку на обработчик
+            postRequest("http://northstar-logistics.ru/help_me_driver", text);
+            enterProblemField.getEditText().getText().clear();
         } else {
             Toast.makeText(this, "Пожалуйста, введите текст", Toast.LENGTH_SHORT).show();
         }
