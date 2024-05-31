@@ -88,63 +88,64 @@
         android:fontFamily="sans-serif-black"
         android:text="@string/characteristicsTextView"
         android:textColor="@color/main_color"
-        android:textSize="30sp"
+        android:textSize="30dp"
         app:layout_constraintStart_toEndOf="@+id/menu"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-    <!-- TextView для отображения содержимого базы данных -->
-    <TextView
-        android:id="@+id/dbTextView"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:fontFamily="sans-serif-black"
-        android:padding="10dp"
-        android:text="@string/dot"
-        android:textColor="@color/main_color"
-        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/characteristicsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/characteristicsTextView">
 
-    <!-- Поле ввода текста -->
-    <EditText
-        android:id="@+id/inputText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        android:hint="@string/enterDetails"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dbTextView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!-- Кнопка Сохранить -->
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/save_car_number"
-        android:onClick="saveText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputText" />
+            <!-- TextView для отображения содержимого базы данных -->
+            <TextView
+                android:id="@+id/dbTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="@string/dot"
+                android:textColor="@color/main_color"
+                android:textSize="18sp" />
 
-    <!-- Кнопка Очистить базу данных -->
-    <Button
-        android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/clean"
-        android:onClick="clearDatabase"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+            <!-- Поле ввода текста -->
+            <EditText
+                android:id="@+id/inputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterDetails"
+                android:minHeight="48dp" />
 
+            <!-- Кнопка Сохранить -->
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:onClick="saveText"
+                android:text="@string/save_car_number" />
+
+            <!-- Кнопка Очистить базу данных -->
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:onClick="clearDatabase"
+                android:text="@string/clean" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
