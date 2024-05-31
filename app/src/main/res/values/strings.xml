@@ -20,4 +20,5 @@
     <string name="sendProblemBtnText">Отправить</string>
     <string name="enterDetails">Введите характеристики и особенности авто</string>
     <string name="clean">Очистить все</string>
+    <string name="copyCoord">Копировать координаты</string>
 </resources>

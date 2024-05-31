@@ -1,5 +1,8 @@
 package com.northstar_logistics.northstar;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -170,6 +173,24 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    // Обработчик нажатия кнопки "Копировать координаты"
+    public void copyCoordinates(View view) {
+        String coordinates = String.format("%s\n%s",
+                coord_start, coord_end);
+
+        // Копируем координаты в буфер обмена
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Координаты", coordinates);
+        if (clipboard != null) {
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Координаты скопированы в буфер обмена", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Не удалось скопировать координаты", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     // Боковое меню
 
     // Назад на страницу входа

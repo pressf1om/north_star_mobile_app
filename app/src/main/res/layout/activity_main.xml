@@ -50,9 +50,9 @@
     <LinearLayout
         android:id="@+id/mainLinearLayout"
         android:layout_width="0dp"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:layout_marginStart="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:background="@color/white"
         android:orientation="vertical"
@@ -191,6 +191,17 @@
             app:layout_constraintTop_toBottomOf="@id/carBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/copyCoordinatesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="copyCoordinates"
+        android:text="@string/copyCoord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/mainLinearLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
