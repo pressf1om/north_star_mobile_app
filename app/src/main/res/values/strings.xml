@@ -21,4 +21,14 @@
     <string name="enterDetails">Введите характеристики и особенности авто</string>
     <string name="clean">Очистить все</string>
     <string name="copyCoord">Копировать координаты</string>
+    <string name="abotStatus">Все виды статусов: </string>
+    <string name="status1">Свободна</string>
+    <string name="status2">Назначена</string>
+    <string name="status3">Прибыла на погрузку</string>
+    <string name="status4">Погружена</string>
+    <string name="status5">Транзит</string>
+    <string name="status6">Прибыла на выгрузку</string>
+    <string name="status7">Выгружена</string>
+    <string name="status8">Завершение рейса</string>
+    <string name="status9">Техническое обслуживание</string>
 </resources>
