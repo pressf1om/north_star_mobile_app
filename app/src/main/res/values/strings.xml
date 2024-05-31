@@ -18,4 +18,6 @@
     <string name="uQuestion">Что у вас произошло?</string>
     <string name="discripProblem">Опишите свою проблему здесь</string>
     <string name="sendProblemBtnText">Отправить</string>
+    <string name="enterDetails">Введите характеристики и особенности авто</string>
+    <string name="clean">Очистить все</string>
 </resources>

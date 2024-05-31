@@ -1,14 +1,16 @@
 package com.northstar_logistics.northstar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +19,11 @@ import java.io.IOException;
 public class CarActivity extends AppCompatActivity {
 
     TextView car_number_text;
+    TextView dbTextView;
+    EditText inputText;
     String number_car;
+    SQLiteDatabase db;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,14 @@ public class CarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_car);
 
         car_number_text = findViewById(R.id.upperTxt);
+        dbTextView = findViewById(R.id.dbTextView);
+        inputText = findViewById(R.id.inputText);
+
+        dbHelper = new DatabaseHelper(this);
+        db = dbHelper.getWritableDatabase();
+
+        // Показать содержимое базы данных
+        showDatabaseContent();
 
         // Получаем путь к файлу car_number.txt внутреннего хранилища приложения
         File file = new File(getFilesDir(), "car_number.txt");
@@ -49,6 +63,18 @@ public class CarActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Ошибка при чтении данных из файла", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Метод для отображения содержимого базы данных в TextView
+    private void showDatabaseContent() {
+        Cursor cursor = db.query("texts", null, null, null, null, null, null);
+        StringBuilder stringBuilder = new StringBuilder();
+        while (cursor.moveToNext()) {
+            String text = cursor.getString(cursor.getColumnIndexOrThrow("text"));
+            stringBuilder.append(text).append("\n");
+        }
+        dbTextView.setText(stringBuilder.toString());
+        cursor.close();
     }
 
     // Назад на страницу входа
@@ -92,5 +118,27 @@ public class CarActivity extends AppCompatActivity {
 
         // Запускаем новую активность
         startActivity(intent);
+    }
+
+    // Сохранение текста в базу данных
+    public void saveText(View view) {
+        String text = inputText.getText().toString();
+        if (!text.isEmpty()) {
+            ContentValues values = new ContentValues();
+            values.put("text", text);
+            db.insert("texts", null, values);
+            inputText.setText("");
+            showDatabaseContent();
+            Toast.makeText(this, "Текст сохранен", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Введите текст", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Очистка базы данных
+    public void clearDatabase(View view) {
+        db.delete("texts", null, null);
+        showDatabaseContent();
+        Toast.makeText(this, "База данных очищена", Toast.LENGTH_SHORT).show();
     }
 }
