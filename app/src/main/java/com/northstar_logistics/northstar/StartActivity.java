@@ -21,10 +21,22 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        // Получаем путь к файлу внутреннего хранилища приложения
+        File file = new File(getFilesDir(), "car_number.txt");
+
+        // Проверяем, существует ли файл
+        if (file.exists()) {
+            // Если файл существует, запускаем MainActivity
+            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            startActivity(intent);
+            // Завершаем текущую активность, чтобы пользователь не мог вернуться к ней
+            finish();
+        }
     }
 
     public void saveBtn(View view) {
-        // получаем объект
+        // Получаем объект
         carNumber = findViewById(R.id.car_number);
         // Получаем текст из объекта car_number
         carNumberText = carNumber.getText().toString();
@@ -55,6 +67,7 @@ public class StartActivity extends AppCompatActivity {
 
         // Запускаем новую активность
         startActivity(intent);
+        // Завершаем текущую активность, чтобы пользователь не мог вернуться к ней
+        finish();
     }
-
 }

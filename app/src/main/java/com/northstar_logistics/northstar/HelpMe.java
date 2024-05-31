@@ -30,7 +30,6 @@ public class HelpMe extends AppCompatActivity {
     private OkHttpClient client;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     TextInputLayout enterProblemField;
-    String numberCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,5 +93,11 @@ public class HelpMe extends AppCompatActivity {
             }
         });
     }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(HelpMe.this, CarActivity.class);
+        startActivity(intent);
+    }
+
 
 }
